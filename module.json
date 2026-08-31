@@ -1,0 +1,45 @@
+{
+    "name": "ecommerce-commerce-extensions-filament",
+    "version": "0.1.0",
+    "description": "The operator's view of the third parties a merchant has registered to receive events: their endpoints, what each is subscribed to, every delivery attempted, and — where nothing is bound to carry one — the reason nothing went.",
+    "category": "presentation",
+    "provider": "Liberu\\Ecommerce\\CommerceExtensions\\Filament\\CommerceExtensionsFilamentServiceProvider",
+    "requires": {
+        "packages": {
+            "liberusoftware/ecommerce-commerce-extensions": "^0.1"
+        }
+    },
+    "presentation": {
+        "filament": {
+            "app": [
+                "Liberu\\Ecommerce\\CommerceExtensions\\Filament\\CommerceExtensionsPlugin"
+            ]
+        }
+    },
+    "features": [
+        "Adding an endpoint and rotating a secret both put the secret itself in a persistent notification in the same response that mints it, because the domain returns one exactly once and nothing reads one back — this is the only surface of the three that can show it at all",
+        "No screen, column or entry reads a secret column: the boundary suite forbids it by name, and the only property access in the package is the one on the object the domain returns at issue",
+        "A duplicate endpoint is refused and the panel says why — answering the retry would mean issuing a second secret for an endpoint that already has one",
+        "An attempt that did not go renders the refusal that stopped it, never an empty row: a fresh install where nothing is bound reads as the joint that is not attached rather than as nothing to do",
+        "All seven refusal reasons the domain publishes have a sentence, and a new one is a hole in a match rather than a blank on a screen",
+        "A delivery with no outcome renders as still owed and not as an em dash, because a null there means not settled yet rather than nothing to report",
+        "An attempt with an excerpt and no status renders as a transport that never completed, because that excerpt is an exception message and not anything a receiver said",
+        "The zero duration stored beside such an attempt is suppressed rather than drawn, because it is a substitution for a number nobody measured",
+        "The transport seam is rendered as three facts and not two: bound, nothing bound, and configured with something the container cannot build",
+        "A configured transport the container cannot build is caught on the attempt action as well as on the widget, because the domain resolves it outside any try and would otherwise raise an error page on a host typo",
+        "There is no control that raises an event, because raising one means handing in already-serialised bytes and a panel has none to hand in",
+        "There is no create, edit or delete control anywhere: every write is a published domain action taking the merchant as its first argument, and nothing in this domain is deleted",
+        "Retiring and reinstating are offered for both an extension and an endpoint, and the log outlives either, so a retirement never takes evidence with it",
+        "An endpoint may only be subscribed to a name the merchant registered, and the select offers that registry and nothing else",
+        "A name already held is still offered, because the domain refuses a duplicate by name and hiding the option would restate that rule in a second place",
+        "No action carries a visible guard, because Filament re-evaluates one against a freshly hydrated record at mount and again at callMountedAction, which would make the domain's own refusal unreachable",
+        "Every widget overrides canView and states the merchant in its own query, because a widget is the surface Filament's own tenancy does not reach and canView defaults to true",
+        "Both widgets are constructed by the suite and the standing is asserted through a public accessor returning structured rows, which is the test the host never had",
+        "One clock is read per request in one file, and every window, backoff and overlap on the page is measured from it",
+        "Every figure on the standing widget is a count over an indexed tenant-scoped query, never a read of every delivery into memory to group in PHP",
+        "No subject reference, cause reference or stored payload appears on any listing; a redacted reference renders as a fact rather than as a blank",
+        "This panel offers neither the cross-tenant export nor the cross-tenant erasure, because a screen scoped to one merchant must not carry a control that spans every merchant",
+        "Another merchant's record and one that does not exist raise the same exception on every screen, and nothing checks custody before the lookup",
+        "Every count over a restated relation is asserted at its right non-zero value, because a guarded restatement that reports zero looks exactly like isolation working"
+    ]
+}
