@@ -10,12 +10,50 @@
 ![PHP](https://img.shields.io/badge/PHP-8.5-777BB4?logo=php&logoColor=white) ![Laravel](https://img.shields.io/badge/Laravel-13-FF2D20?logo=laravel&logoColor=white) ![Filament](https://img.shields.io/badge/Filament-5-FDAE4B)
 [![Latest release](https://img.shields.io/github/v/release/liberusoftware/module-ecommerce-commerce-extensions-filament?sort=semver)](https://github.com/liberusoftware/module-ecommerce-commerce-extensions-filament/releases/latest) [![Tests](https://github.com/liberusoftware/module-ecommerce-commerce-extensions-filament/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/liberusoftware/module-ecommerce-commerce-extensions-filament/actions/workflows/tests.yml)
 
-## Features
+## What it presents
 
-- Fully compatible with **Laravel 13**, **PHP 8.5**, and **Pest 5**.
-- Built following the domain-driven design guidelines of the Liberu architecture.
-- Reusable, presenting a clean public contract and boundaries.
-- Adheres to the strict database, security, and authorization standards of Liberu.
+The operator's view of `liberusoftware/ecommerce-commerce-extensions`: the third
+parties a merchant has registered to receive events, the endpoints they receive
+at, what each one is subscribed to, and every attempt ever made to deliver to
+them.
+
+**The one fact that shaped it.** A signing secret is returned exactly once, at
+issue, and nothing reads one back — both columns are encrypted and hidden, and no
+query, event or serialisation gives one up. So a control that added an endpoint
+and redirected to a list would have destroyed the credential it just minted. Both
+actions that issue one put the secret itself in a persistent notification in the
+same response, and this is the only one of the three surfaces that can: a
+Livewire component cannot hold it without republishing it, and an API response is
+not a screen.
+
+**The second fact.** Nothing is bound to carry a signed request until a host binds
+it, because a package cannot know a host's egress arrangements. A merchant looking
+at this panel on a fresh install must see *why* nothing has gone —
+`NoTransportBound` is the truthful answer and it is not an error. Every screen
+here renders the refusal; none of them renders an empty table that reads as
+"nothing to do".
+
+| Screen | What it answers |
+|---|---|
+| **Extensions** | Which third parties this merchant has registered, how many endpoints each holds, and which have been retired — a record, never a PHP package, and registering one boots no code |
+| **Endpoints** | Where each extension receives, whether a rotation overlap is running, and how much it is subscribed to. Adding one issues a secret and shows it once |
+| **Event names** | What may be subscribed to at all. A name registered here or a subscription refused — never a string accepted and then silently matched against nothing |
+| **Deliveries** | One event owed to one endpoint, the bytes stored for it, and every attempt with what came back. The log outlives the endpoint |
+| **Delivery standing** (widget) | Whether anything can carry a request, what is still owed, and every refusal by reason — so the cause is on the first screen rather than inferred from an absence |
+| **Owed an attempt right now** (widget) | What the domain says is due at this instant, measured against one clock the page read once |
+
+## What it does not own
+
+No business rule, no arithmetic, no transport and no decision. Every write is a
+published domain action taking the merchant as its first argument. There is no
+create, edit or delete control anywhere; no control that raises an event, because
+a panel has no payload to hand in; and no control that spans more than one
+merchant.
+
+Nothing here installs, updates or uninstalls anything. `liberusoftware/module-manager`
+decides which code boots, resolved once from configuration.
+
+`docs/panel.md` carries the decisions and the gaps found in the domain package.
 
 ## Requirements
 
